@@ -1,0 +1,69 @@
+{
+  "name": "cors-anywhere-cli",
+  "version": "1.0.0",
+  "description": "CLI for cors-anywhere.",
+  "keywords": [
+    "cors",
+    "cli"
+  ],
+  "homepage": "https://github.com/fjc0k/cors-anywhere-cli#readme",
+  "bugs": {
+    "url": "https://github.com/fjc0k/cors-anywhere-cli/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:fjc0k/cors-anywhere-cli.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Jay Fong",
+    "email": "fjc0kb@gmail.com",
+    "url": "https://github.com/fjc0k"
+  },
+  "main": "lib/cli.js",
+  "bin": {
+    "cors": "lib/cli.js"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "build": "shx rm -rf lib && tsc",
+    "dev": "shx rm -rf lib && tsc -w",
+    "prepublishOnly": "npm run build",
+    "release": "standard-version -a && git push --follow-tags origin master && npm publish",
+    "test": "jest"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{css,less,scss,sass,html,htm,vue,yml,yaml,json,md}": [
+      "prettier --write"
+    ],
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
+  "dependencies": {
+    "cors-anywhere": "^0.4.3",
+    "signal-exit": "^3.0.3",
+    "tslib": "^2.0.1",
+    "yargs": "^16.0.3"
+  },
+  "devDependencies": {
+    "@types/signal-exit": "^3.0.0",
+    "eslint": "^7.9.0",
+    "haoma": "^2.5.0",
+    "husky": "^4.3.0",
+    "jest": "^26.4.2",
+    "lint-staged": "^10.4.0",
+    "prettier": "^2.1.2",
+    "shx": "^0.3.2",
+    "standard-version": "^9.0.0",
+    "typescript": "^4.0.3"
+  }
+}
