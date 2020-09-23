@@ -20,7 +20,7 @@
     "email": "fjc0kb@gmail.com",
     "url": "https://github.com/fjc0k"
   },
-  "main": "lib/cli.js",
+  "main": "lib/run.js",
   "bin": {
     "cors": "lib/cli.js"
   },
@@ -32,8 +32,7 @@
     "build:docker": "shx rm -rf dist && rollup -c",
     "build:lib": "shx rm -rf lib && tsc",
     "dev": "shx rm -rf lib && tsc -w",
-    "prepublishOnly": "npm run build",
-    "release": "standard-version -a && git push --follow-tags origin master && npm publish",
+    "release": "standard-version -a && git push --follow-tags origin master",
     "test": "jest"
   },
   "husky": {

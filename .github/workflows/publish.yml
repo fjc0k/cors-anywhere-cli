@@ -1,0 +1,36 @@
+name: Publish
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  publish:
+    name: Publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '13'
+          registry-url: 'https://registry.npmjs.org'
+      - uses: actions/cache@v2
+        id: cache
+        with:
+          path: node_modules
+          key: ${{ hashFiles('pnpm-lock.yaml') }}
+      - if: ${{ steps.cache.outputs.cache-hit != 'true' }}
+        run: npx pnpm install
+      - run: |
+          VERSION=${GITHUB_REF:11}
+          npm run build
+          npm publish
+          docker login -u jayfong -p ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+          docker build -f ./Dockerfile -t jayfong/cors:latest -t jayfong/cors:${VERSION} .
+          docker push jayfong/cors:latest
+          docker push jayfong/cors:${VERSION}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
