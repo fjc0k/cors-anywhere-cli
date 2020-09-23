@@ -1,7 +1,6 @@
 #!/usr/bin/env node
-import cors from 'cors-anywhere'
-import onExit from 'signal-exit'
 import yargs from 'yargs'
+import { run } from './run'
 
 const argv = yargs.usage('Usage: $0 [options]').options({
   port: {
@@ -18,14 +17,7 @@ const argv = yargs.usage('Usage: $0 [options]').options({
   },
 }).argv
 
-const server = cors.createServer()
-server.listen(argv.port, argv.host, () => {
-  console.log(
-    `The cors proxy server running on: http://${argv.host}:${argv.port}`,
-  )
-})
-onExit(() => {
-  server.close(() => {
-    process.exit(0)
-  })
+run({
+  host: argv.host,
+  port: argv.port,
 })
