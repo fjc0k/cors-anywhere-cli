@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/fjc0k/cors-anywhere-cli/compare/v1.1.0...v1.2.0) (2020-11-04)
+
+### Features
+
+- add corsMaxAge & httpProxyOptions ([17d3512](https://github.com/fjc0k/cors-anywhere-cli/commit/17d351235a917913dd3469a82dbc4ab56727fad6))
+
 ## [1.1.0](https://github.com/fjc0k/cors-anywhere-cli/compare/v1.0.0...v1.1.0) (2020-09-23)
 
 ### Features
